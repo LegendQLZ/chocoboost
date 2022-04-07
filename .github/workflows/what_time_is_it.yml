@@ -2,7 +2,7 @@ name: what_time_is_it
 on: push
 jobs:
   date:
-    runs-on: ubuntu:latest
+    runs-on: ubuntu-20.04
     steps:
     - uses: actions/checkout@v2
     - name: date
