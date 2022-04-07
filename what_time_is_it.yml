@@ -1,0 +1,7 @@
+name: what_time_is_it
+on: push
+jobs:
+  date:
+    runs-on: ubuntu:latest
+    name: date
+    run: date
