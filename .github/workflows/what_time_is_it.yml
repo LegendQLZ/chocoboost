@@ -3,5 +3,7 @@ on: push
 jobs:
   date:
     runs-on: ubuntu:latest
-    name: date
-    run: date
+    steps:
+    - uses: actions/checkout@v2
+    - name: date
+      run: date
