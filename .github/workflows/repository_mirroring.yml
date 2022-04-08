@@ -7,25 +7,24 @@ jobs:
     - uses: actions/checkout@v2
       with:
         fetch-depth: 0
-    - uses: pixta-dev/repository-mirroring-action@v1
-      with:
-        target_repo_url:
-          git@gitlab.com:LegendQLZ/chocoboost.git
-        ssh_private_key:
-          ${{secrets.PRIVATE_REPO}}
-
+    # - uses: pixta-dev/repository-mirroring-action@v1
+      # with:
+      #   target_repo_url:
+      #     git@gitlab.com:LegendQLZ/chocoboost.git
+      #   ssh_private_key:
+      #     ${{secrets.PRIVATE_REPO}}
 
   to_codecommit:                                        # <-- different jobs are executed in parallel.
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - uses: pixta-dev/repository-mirroring-action@v1
-        with:
-          target_repo_url:
-            git@gitlab.com:LegendQLZ/chocoboost.git
-          ssh_private_key:
-            ${{ secrets.PRIVATE_REPO }}
-          ssh_username:                                 # <-- (for codecommit) you need to specify ssh-key-id as ssh username.
-            ${{ secrets.theo.gence@epitech.eu }}
+  runs-on: ubuntu-20.04
+  steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    # - uses: pixta-dev/repository-mirroring-action@v1
+        # with:
+        #   target_repo_url:
+        #     git@gitlab.com:LegendQLZ/chocoboost.git
+        #   ssh_private_key:
+        #     ${{ secrets.PRIVATE_REPO }}
+        #   ssh_username:                                 # <-- (for codecommit) you need to specify ssh-key-id as ssh username.
+        #     ${{ secrets.theo.gence@epitech.eu }}
