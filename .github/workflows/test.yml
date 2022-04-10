@@ -1,0 +1,40 @@
+name: Mirroring
+
+on: [push]
+
+jobs:
+  check_repository_cleanliness:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: check
+      run: |
+      files=$(find . -lname "*.o")
+      files+=$(find . -lname "*.a")
+      files+=$(find . -lname "*.so")
+      files+=$(find . -lname "*.gcno")
+      files+=$(find . -lname "*.gcda")
+      files+=$(find . -lname "*.gcovr")
+      files+=$(find . -lname "#*")
+      files+=$(find . -lname "*-")
+      files+=$(find . -lname "pain au chocolat")
+      dir=$(find . -type d -name "tmp")
+      if [ $lines -ne 0 ] && [ $dir -ne 0 ]; then
+        echo "::error::Unwanted files detected: $lines"
+        exit 1
+      fi
+  check_program_compilation:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: make
+      run: make
+    - name: clean
+      run: make clean
+  - uses: pixta-dev/repository-mirroring-action@v1
+      with:
+        target_repo_url:
+          git@github.com:EpitechPromo2026/B-DOP-200-RUN-2-1-chocolatine-theo.gence.git
+        ssh_private_key:
+          ${{secrets.PRIVATE_REPO}}
+  run_tests:
